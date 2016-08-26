@@ -1,0 +1,6 @@
+/samples/LDView/Build
+/samples/LDView/*.db
+/samples/LDView/3rdParty_src/unzip32/windll/vc14/*.db
+/samples/LDView/3rdParty_src/libpng/projects/vstudio/*.db
+/samples/LDView/3rdParty_src/unzip32/win32/vc14/*.db
+/samples/LDView/3rdParty_src/zlib-1.2.8/contrib/vstudio/vc14/*.db

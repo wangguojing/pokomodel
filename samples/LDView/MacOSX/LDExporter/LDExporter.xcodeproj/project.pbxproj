@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F10E65D0E04DAF900E227DD /* LDExporterSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F10E6590E04DAF900E227DD /* LDExporterSetting.cpp */; };
+		1F10E65E0E04DAF900E227DD /* LDExporterSetting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F10E65A0E04DAF900E227DD /* LDExporterSetting.h */; };
+		1F10E65F0E04DAF900E227DD /* LDStlExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F10E65B0E04DAF900E227DD /* LDStlExporter.cpp */; };
+		1F10E6600E04DAF900E227DD /* LDStlExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F10E65C0E04DAF900E227DD /* LDStlExporter.h */; };
+		1F2DD23D0DE15D0D00C675D7 /* LDExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2DD2390DE15D0D00C675D7 /* LDExporter.cpp */; };
+		1F2DD23E0DE15D0D00C675D7 /* LDExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2DD23A0DE15D0D00C675D7 /* LDExporter.h */; };
+		1F2DD23F0DE15D0D00C675D7 /* LDPovExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2DD23B0DE15D0D00C675D7 /* LDPovExporter.cpp */; };
+		1F2DD2400DE15D0D00C675D7 /* LDPovExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2DD23C0DE15D0D00C675D7 /* LDPovExporter.h */; };
+		1F37080215A0CE8F002C73AA /* LDLdrExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F37080015A0CE8F002C73AA /* LDLdrExporter.cpp */; };
+		1F37080315A0CE8F002C73AA /* LDLdrExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F37080115A0CE8F002C73AA /* LDLdrExporter.h */; };
+		1F89FC8F0F761330001F12AE /* LD3dsExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F89FC8D0F761330001F12AE /* LD3dsExporter.cpp */; };
+		1F89FC900F761330001F12AE /* LD3dsExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F89FC8E0F761330001F12AE /* LD3dsExporter.h */; };
+		D2AAC088055469A000DB518D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1F10E6590E04DAF900E227DD /* LDExporterSetting.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LDExporterSetting.cpp; path = ../../LDExporter/LDExporterSetting.cpp; sourceTree = SOURCE_ROOT; };
+		1F10E65A0E04DAF900E227DD /* LDExporterSetting.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LDExporterSetting.h; path = ../../LDExporter/LDExporterSetting.h; sourceTree = SOURCE_ROOT; };
+		1F10E65B0E04DAF900E227DD /* LDStlExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LDStlExporter.cpp; path = ../../LDExporter/LDStlExporter.cpp; sourceTree = SOURCE_ROOT; };
+		1F10E65C0E04DAF900E227DD /* LDStlExporter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LDStlExporter.h; path = ../../LDExporter/LDStlExporter.h; sourceTree = SOURCE_ROOT; };
+		1F2DD2390DE15D0D00C675D7 /* LDExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LDExporter.cpp; path = ../../LDExporter/LDExporter.cpp; sourceTree = SOURCE_ROOT; };
+		1F2DD23A0DE15D0D00C675D7 /* LDExporter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LDExporter.h; path = ../../LDExporter/LDExporter.h; sourceTree = SOURCE_ROOT; };
+		1F2DD23B0DE15D0D00C675D7 /* LDPovExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LDPovExporter.cpp; path = ../../LDExporter/LDPovExporter.cpp; sourceTree = SOURCE_ROOT; };
+		1F2DD23C0DE15D0D00C675D7 /* LDPovExporter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LDPovExporter.h; path = ../../LDExporter/LDPovExporter.h; sourceTree = SOURCE_ROOT; };
+		1F37080015A0CE8F002C73AA /* LDLdrExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LDLdrExporter.cpp; sourceTree = "<group>"; };
+		1F37080115A0CE8F002C73AA /* LDLdrExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDLdrExporter.h; sourceTree = "<group>"; };
+		1F89FC8D0F761330001F12AE /* LD3dsExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LD3dsExporter.cpp; path = ../../LDExporter/LD3dsExporter.cpp; sourceTree = SOURCE_ROOT; };
+		1F89FC8E0F761330001F12AE /* LD3dsExporter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LD3dsExporter.h; path = ../../LDExporter/LD3dsExporter.h; sourceTree = SOURCE_ROOT; };
+		32DBCF5E0370ADEE00C91783 /* LDExporter_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDExporter_Prefix.pch; sourceTree = "<group>"; };
+		D2AAC07E0554694100DB518D /* libLDExporter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLDExporter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7E8BE07B2D77200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AAC088055469A000DB518D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libLDExporter.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* LDExporter */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* LDExporter */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = LDExporter;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
+				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* LDExporter */ = {
+			isa = PBXGroup;
+			children = (
+				1F89FC8D0F761330001F12AE /* LD3dsExporter.cpp */,
+				1F89FC8E0F761330001F12AE /* LD3dsExporter.h */,
+				1F2DD2390DE15D0D00C675D7 /* LDExporter.cpp */,
+				1F2DD23A0DE15D0D00C675D7 /* LDExporter.h */,
+				1F10E6590E04DAF900E227DD /* LDExporterSetting.cpp */,
+				1F10E65A0E04DAF900E227DD /* LDExporterSetting.h */,
+				1F37080015A0CE8F002C73AA /* LDLdrExporter.cpp */,
+				1F37080115A0CE8F002C73AA /* LDLdrExporter.h */,
+				1F2DD23B0DE15D0D00C675D7 /* LDPovExporter.cpp */,
+				1F2DD23C0DE15D0D00C675D7 /* LDPovExporter.h */,
+				1F10E65B0E04DAF900E227DD /* LDStlExporter.cpp */,
+				1F10E65C0E04DAF900E227DD /* LDStlExporter.h */,
+			);
+			name = LDExporter;
+			path = ../../LDExporter;
+			sourceTree = "<group>";
+		};
+		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
+				D2F7E8BE07B2D77200F64583 /* CoreData.framework */,
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF5E0370ADEE00C91783 /* LDExporter_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F2DD23E0DE15D0D00C675D7 /* LDExporter.h in Headers */,
+				1F2DD2400DE15D0D00C675D7 /* LDPovExporter.h in Headers */,
+				1F10E65E0E04DAF900E227DD /* LDExporterSetting.h in Headers */,
+				1F10E6600E04DAF900E227DD /* LDStlExporter.h in Headers */,
+				1F89FC900F761330001F12AE /* LD3dsExporter.h in Headers */,
+				1F37080315A0CE8F002C73AA /* LDLdrExporter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* LDExporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "LDExporter" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LDExporter;
+			productName = LDExporter;
+			productReference = D2AAC07E0554694100DB518D /* libLDExporter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "LDExporter" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* LDExporter */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* LDExporter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F2DD23D0DE15D0D00C675D7 /* LDExporter.cpp in Sources */,
+				1F2DD23F0DE15D0D00C675D7 /* LDPovExporter.cpp in Sources */,
+				1F10E65D0E04DAF900E227DD /* LDExporterSetting.cpp in Sources */,
+				1F10E65F0E04DAF900E227DD /* LDStlExporter.cpp in Sources */,
+				1F89FC8F0F761330001F12AE /* LD3dsExporter.cpp in Sources */,
+				1F37080215A0CE8F002C73AA /* LDLdrExporter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LDExporter_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = LDExporter;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LDExporter_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = LDExporter;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					COCOA,
+					HAVE_MINIZIP,
+					TIXML_USE_STL,
+				);
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../3rdParty/tinyxml,
+					../../3rdParty/lib3ds,
+					../../boost/include,
+					"$(HEADER_SEARCH_PATHS)",
+					../..,
+					../../include,
+				);
+				PREBINDING = NO;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					COCOA,
+					HAVE_MINIZIP,
+					TIXML_USE_STL,
+				);
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../3rdParty/tinyxml,
+					../../3rdParty/lib3ds,
+					../../boost/include,
+					"$(HEADER_SEARCH_PATHS)",
+					../..,
+					../../include,
+				);
+				PREBINDING = NO;
+			};
+			name = Release;
+		};
+		1F2DD25E0DE15DFB00C675D7 /* Release_Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LDExporter_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = LDExporter;
+			};
+			name = Release_Universal;
+		};
+		1F2DD25F0DE15DFB00C675D7 /* Release_Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					EXPORT_3DS,
+					COCOA,
+					HAVE_MINIZIP,
+					TIXML_USE_STL,
+				);
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../3rdParty/tinyxml,
+					../../3rdParty/lib3ds,
+					../../boost/include,
+					"$(HEADER_SEARCH_PATHS)",
+					../..,
+					../../include,
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Release_Universal;
+		};
+		1F37B82B1585855B007E0829 /* Release_Tiger */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					COCOA,
+					HAVE_MINIZIP,
+					TIXML_USE_STL,
+					_NO_BOOST,
+				);
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../3rdParty/tinyxml,
+					../../3rdParty/lib3ds,
+					"$(HEADER_SEARCH_PATHS)",
+					../..,
+					../../include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+			};
+			name = Release_Tiger;
+		};
+		1F37B82C1585855B007E0829 /* Release_Tiger */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LDExporter_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = LDExporter;
+			};
+			name = Release_Tiger;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "LDExporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+				1F37B82C1585855B007E0829 /* Release_Tiger */,
+				1F2DD25E0DE15DFB00C675D7 /* Release_Universal */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "LDExporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+				1F37B82B1585855B007E0829 /* Release_Tiger */,
+				1F2DD25F0DE15DFB00C675D7 /* Release_Universal */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

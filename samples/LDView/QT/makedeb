@@ -1,0 +1,30 @@
+#!/bin/sh
+devbuild=.0.1
+for pkg in gcc cvs make g++ libqt4-dev libboost-thread*dev libpng*dev \
+	libjpeg*dev libtinyxml-dev cmake kdelibs5-dev fakeroot lintian \
+	build-essential libgl2ps-dev libboost-dev debhelper ; do
+	dpkg-query -W --showformat='${Package;-30}\t${Status}\n' $pkg|\
+	grep -qv not-installed
+	if [ $? -eq 1 ]  ;then
+		echo Missing package: $pkg
+	fi
+done
+if [ -f /etc/lsb-release ] ; then
+. /etc/lsb-release
+fi
+if [ -n "$DISTRIB_ID" ] ; then
+	DIST=`echo $DISTRIB_ID|tr '[:upper:]' '[:lower:]'`-$DISTRIB_RELEASE.
+else
+	if lsb_release -i |grep -q : ; then
+		DIST=`lsb_release -is|tr '[:upper:]' '[:lower:]'`-`lsb_release -sc`.
+	fi
+fi
+cd ..
+ln -sf QT/debian debian
+rm -f ../ldview*.dsc ../ldview*.deb QT/ldview*.deb
+dpkg-buildpackage
+lintian ../ldview*.deb ../ldview*.dsc
+rm -f debian
+cd ..
+cp -f ldview*.deb LDView/QT/ldview-4.2-${DIST}`dpkg-architecture -qDEB_BUILD_ARCH`.deb
+

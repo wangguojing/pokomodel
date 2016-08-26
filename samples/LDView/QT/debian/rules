@@ -1,0 +1,159 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+# export DH_COMPAT=7
+
+CFLAGS = -g
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+CFLAGS += -O0
+else
+CFLAGS += -O2
+endif
+
+NOBOOST = `if [ -f /usr/src/packages/BUILD/QT/LDView.pro ] ; then echo 'DEFINES+=_NO_BOOST' ; fi`
+TESTING := $(shell if [ ! -f /usr/include/gl2ps.h ] ; then echo -I ../gl2ps -L ../gl2ps ; fi; if [ ! -f /usr/include/tinyxml.h ] ; then echo -I ../3rdParty/tinyxml ; fi)
+DEST=$(shell if [ -f /usr/src/packages/BUILD/QT/LDView.pro ] ; then echo /usr/src/packages/BUILD/debian/ldview ; else echo debian/ldview ; fi )
+export Q_LDFLAGS="-Wl,-z,relro"
+
+build-arch: build
+build-indep: build
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	if [ -f LDView.pro ] ; then cd .. ; fi ; \
+	cd OSMesa ;                              \
+	export TESTING="$(TESTING)" ;            \
+	make all ;                               \
+	cd ../QT ;                               \
+	if [ `uname -m` = "x86_64" ] ; then      \
+		qmake-qt4 -config release        \
+		 -spec linux-g++-64 $(NOBOOST) ; \
+	else                                     \
+		qmake-qt4 -config release        \
+		 -spec linux-g++-32 $(NOBOOST) ; \
+	fi ;                                     \
+	lrelease-qt4 LDView.pro ;                \
+	make all ;                               \
+	cd kde ; mkdir -p build ; cd build ;     \
+	cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .. ; \
+	make all
+	# --- end custom part for compiling
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+
+	# Add here commands to clean up after the build process.
+	if [ -f LDView.pro ] ; then cd .. ; fi ; \
+	cd 3rdParty/tinyxml ; make -f Makefile.pbartfai clean || true
+	if [ -f LDView.pro ] ; then cd .. ; fi ; \
+	cd QT ; qmake-qt4 ; make clean || true ; cd .. ;\
+	cd OSMesa ; make clean || true ; cd .. ; \
+	cd QT/kde ; if [ -d build ]; then rm -rf build ; fi
+	# --- end custom part for cleaning up
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	# Add here commands to install the package
+	# The DESTDIR Has To Be Exactly  /usr/src/packages/BUILD/debian/<nameOfPackage>
+	if [ -f LDView.pro ] ; then cd .. ; fi ; \
+	cd QT ; make INSTALL_ROOT=$(DEST) install              ;\
+	rm -f $(DEST)/usr/share/ldview/license.txt             ;\
+	cp -f ../OSMesa/ldview $(DEST)/usr/bin/                ;\
+	mkdir -p $(DEST)/usr/share/mime-info/                  ;\
+	mkdir -p $(DEST)/usr/share/mime/packages/              ;\
+	mkdir -p $(DEST)/usr/share/application-registry/       ;\
+	mkdir -p $(DEST)/usr/share/applications/               ;\
+	mkdir -p $(DEST)/usr/share/thumbnailers/               ;\
+	mkdir -p $(DEST)/usr/share/pixmaps/                    ;\
+	mkdir -p $(DEST)/usr/share/icons/gnome/32x32/mimetypes ;\
+	mkdir -p $(DEST)/usr/share/gconf/schemas               ;\
+	mkdir -p $(DEST)/usr/share/man/man1                    ;\
+	install -m 644 desktop/ldraw.mime                       \
+		$(DEST)/usr/share/mime-info/ldraw.mime         ;\
+	install -m 644 desktop/ldraw.xml                        \
+		$(DEST)/usr/share/mime/packages/ldraw.xml      ;\
+	install -m 644 desktop/ldraw.keys                       \
+		$(DEST)/usr/share/mime-info/ldraw.keys         ;\
+	install -m 644 desktop/ldview.applications              \
+		$(DEST)/usr/share/application-registry/ldview.applications ;\
+	install -m 644 desktop/ldview.desktop                   \
+		$(DEST)/usr/share/applications/ldview.desktop  ;\
+	install -m 644 desktop/ldview.thumbnailer               \
+		$(DEST)/usr/share/thumbnailers/ldview.thumbnailer;\
+	install -m 755 desktop/ldraw-thumbnailer                \
+		$(DEST)/usr/bin/ldraw-thumbnailer              ;\
+	install -m 644 images/LDViewIcon.png                    \
+		$(DEST)/usr/share/pixmaps/gnome-ldraw.png      ;\
+	install -m 644 images/LDViewIcon.png                    \
+		$(DEST)/usr/share/icons/gnome/32x32/mimetypes/gnome-mime-application-x-ldraw.png ;\
+	install -m 644 images/LDViewIcon.png                    \
+		$(DEST)/usr/share/icons/gnome/32x32/mimetypes/gnome-mime-application-x-multipart-ldraw.png ;\
+	install -m 644 desktop/ldraw.schemas                    \
+		$(DEST)/usr/share/gconf/schemas/ldraw.schemas  ;\
+	mkdir -p $(DEST)/usr/share/kde4/services               ;\
+	install -m 644 kde/ldviewthumbnailcreator.desktop       \
+		$(DEST)/usr/share/kde4/services/ldviewthumbnailcreator.desktop ;\
+	install -m 644 LDView.1                                 \
+		$(DEST)/usr/share/man/man1/LDView.1            ;\
+	gzip -f -9 $(DEST)/usr/share/man/man1/LDView.1         ;\
+	install -m 644 desktop/ldraw-thumbnailer.1              \
+		$(DEST)/usr/share/man/man1/ldraw-thumbnailer.1 ;\
+	gzip -f -9 $(DEST)/usr/share/man/man1/ldraw-thumbnailer.1;\
+	install -m 644 ../OSMesa/ldview.1                       \
+		$(DEST)/usr/share/man/man1/ldview.1            ;\
+	gzip -f -9 $(DEST)/usr/share/man/man1/ldview.1
+	# --- end custom part for installing
+
+# Build architecture-independent files here.
+binary-indep: build install
+	# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+#	dh_installdebconf
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+	dh_installcron
+	dh_installman
+	dh_installinfo
+	dh_gconf
+#	dh_undocumented
+	dh_installchangelogs
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_makeshlibs
+	dh_installdeb
+#	dh_perl
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

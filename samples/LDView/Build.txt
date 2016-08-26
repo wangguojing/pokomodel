@@ -1,0 +1,220 @@
+LDView should be buildable with Visual Studio 6, Visual C++ Toolkit 2003, and
+Visual C++ Express 2005.  (Scroll down to the appropriate sections for Visual
+Studio 6 and Visual C++ Toolkit 2003.)
+
+
+
+===============================================================================
+============================== VC++ 2005 Express ==============================
+===============================================================================
+
+Note: this should also build in the commercial version of Visual Studio 2005.  I
+believe that in that version, you can skip everything below related to the
+Platform SDK.  (Start at the Boost section.)  This hasn't been tested, though.
+
+Install the Microsoft Platform SDK for Windows Server 2003 R2.  At the time of
+this writing, this could be downloaded from the following location:
+
+http://www.microsoft.com/downloads/details.aspx?FamilyId=A55B6B43-E24F-4EA3-A93E-40C0EC4F68E5
+
+The above is the web install; a small installer is downloaded, and it downloads
+the rest when you perform the install.  If you'd prefer to just download the
+whole thing (400MB), you can go here:
+
+http://www.microsoft.com/downloads/details.aspx?familyid=484269E2-3B89-47E3-8EB7-1F2BE6D7123A
+
+In the Visual Studio IDE, go to Tool->Options.  In the tree view on the left,
+navigate to the following location:
+
+Projects and Solutions\VC++ Directories
+
+In the "Show directories for" combo box in the upper right, select "Include
+files".
+Add the following two directories to the top of the list of directories:
+
+C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include
+C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include\atl
+
+(Note that the base path will be different if you didn't install the Platform
+SDK in its default location.  If that it the case, adjust accordingly.)  Next,
+select "Library files" from the "Show directories for" combo box.  Add the
+following directory to the top of the list:
+
+C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib
+
+(Once again, the base path will depend on where you installed the Platform SDK.)
+
+Download the Boost library from http://www.boost.org.  After extracting it to
+a directory somewhere, open a command window and go into the following directory
+inside the location you extracted the library to:
+
+boost_1_35_0\tools\build\jam_src
+
+
+(Change boost_1_35_0 to match whatever version of boost you downloaded.)  Run
+the following (include the quotes):
+
+"C:\Program Files\Microsoft Visual Studio 8\VC\vcvarsall.bat"
+"C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\SetEnv.Cmd"
+
+(Note that the above assumes that you installed Visual C++ 2005 Express into the
+default location.  If not, adjust accordingly.  Make sure to include quotes
+around the entire command line if any part of the path contains spaces.)  Also,
+if you have the Pro version of Visual Studio 2005, the second command isn't
+necessary.
+
+Next, run the following command:
+
+build.bat
+
+The above will create bjam.exe.  This should be located in the bin.ntx86 under
+the current directory.  Copy that file to the main boost directory
+(boost_1_35_0 in my case).  Next, run the following commands:
+
+cd ..\..\..
+bjam --with-thread --with-date_time --toolset=msvc-8.0 link=static runtime-link=static stage release debug
+
+When the above command complete, you should have the boost thread library built.
+Now you need to copy files to the LDView source tree.  Copy the boost directory
+inside the boost_1_35_0 directory into the boost\include directory in the LDView
+source directory (so you end up with boost\include\boost).  Next, copy the
+stage\lib directory into the boost directory in the LDView source tree (so that
+you end up with boost\lib).
+
+You should now be able to build LDView.  Just open LDView.sln, make sure LDView
+is set as the default project, and build.
+
+
+
+===============================================================================
+=============================== Visual Studio 6 ===============================
+===============================================================================
+
+Note: If you build with Visual Studio 6, you won't get INI support in
+TCUserDefaults.  That means that it will still use the registry even when
+running off a removable drive, and paths will always be absolute.  I know that
+sucks, but the C++ compiler in Visual Studio 6 isn't good enough to do what I
+needed it to do for the easiest implementation, and I wasn't willing to spend
+the extra time needed to write code that would compile there.  (Specifically,
+a std::map in VS6 cannot have a value type that refers back to the map itself.
+Look at IniKeyMap in TCUserDefaults.h to see what doesn't work there.)
+
+Install the February 2003 Microsoft Platform SDK.  This should be available from
+the following location:
+
+http://www.microsoft.com/msdownload/platformsdk/sdkupdate/psdk-full.htm
+
+Please follow the directions on that page in order to install the SDK, since
+it's rather unusual due to having been (essentially) deprecated.  Please note
+that the Setup.exe program that you run will only work properly if Internet
+Explorer is your default web browser.  If that isn't the case, just open the
+default.htm web page in IE directly.  If prompted to do so by IE, make sure to
+allow blocked content.
+
+In the Visual Studio IDE, go to Tools->Options.  Select the Directories tab.  In
+the "Show directories for" combo box in the upper right, make sure "Include
+files" is selected.  Add the following two entries to the top of the list of
+directories:
+
+C:\Program Files\Microsoft SDK\include
+C:\Program Files\Microsoft SDK\include\win64\atl
+
+(Note that the base path will be different if you didn't install the Platform
+SDK in its default location.  If that it the case, adjust accordingly.  Also
+note that the win64 part is misleading.  It works fine in win32 also, and in
+fact LDView cannot be successfully built and run in win64.)  Next, select
+"Library files" from the "Show directories for" combo box.  Add the
+following directory to the top of the list:
+
+C:\Program Files\Microsoft SDK\lib
+
+(Once again, the base path will depend on where you installed the Platform SDK.)
+
+Boost no longer supports Visual Studio 6.0.  To build the VS6 project, use the
+NoBoost build targets (DebugNoBoost and ReleaseNoBoost).  You can hopefully
+follow these instructions to use Boost 1.33.1 instead, but I won't be testing
+that configuration, so it might not work right.
+
+Download the Boost library from http://www.boost.org.  After extracting it to
+a directory somewhere, open a command window and go into the following directory
+inside the location you extracted the library to:
+
+boost_1_33_1\tools\build\jam_src
+
+
+(Change boost_1_33_1 to match whatever version of boost you downloaded.)  Run
+the following (include the quotes):
+
+"C:\Program Files\Microsoft Visual Studio\VC98\Bin\VCVARS32.BAT"
+
+(Note that the above assumes that you installed Visual Studio 6 into the default
+location.  If not, adjust accordingly.  Make sure to include quotes around the
+entire command line if any part of the path contains spaces.)  Next, run the
+following command:
+
+build.bat
+
+The above will create bjam.exe.  This should be located in the bin.ntx86
+directory under the current directory.  Copy that file to the main boost
+directory (boost_1_33_1 in my case).  Next, run the following commands:
+
+cd ..\..\..
+bjam --without-python --with-thread -sTOOLS=msvc stage
+
+When the above command completes, you should have the boost thread library
+built.  Now you need to copy files to the LDView source tree.  Copy the boost
+directory inside the boost_1_33_1 directory into the boost\include directory in
+the LDView source directory (so you end up with boost\include\boost).  Next,
+copy the stage\lib directory into the boost directory in the LDView source tree
+(so that you end up with boost\lib).
+
+You should now be able to build LDView.  Just open LDView.dsw, make sure LDView
+is set as the default project, and build.
+
+
+
+===============================================================================
+============================== VC++ Toolkit 2003 ==============================
+===============================================================================
+
+Note: this should also build in the commercial version of Visual Studio 2003.  I
+believe that in that version, you can skip the Platform SDK step below.  (Start
+at the Boost section.)  This hasn't been tested, though.
+
+First, follow the Microsoft Platform SDK instructions in the Visual Studio 6
+section above.
+
+Download the Boost library from http://www.boost.org.  After extracting it to
+a directory somewhere, open a command window and go into the following directory
+inside the location you extracted the library to:
+
+boost_1_35_0\tools\build\jam_src
+
+
+(Change boost_1_35_0 to match whatever version of boost you downloaded.)  Run
+the following (include the quotes):
+
+"C:\Program Files\Microsoft Visual C++ Toolkit 2003\vcvars32.bat"
+
+(Note that the above assumes that you installed Visual C++ Toolkit 2003 into the
+default location.  If not, adjust accordingly.  Make sure to include quotes
+around the entire command line if any part of the path contains spaces.)  Next,
+run the following command:
+
+build.bat
+
+The above will create bjam.exe.  This should be located in the bin.ntx86
+directory under the current directory.  Copy that file to the main boost
+directory (boost_1_35_0 in my case).  Next, run the following commands:
+
+cd ..\..\..
+bjam --with-thread --with-date_time --toolset=msvc-7.1 link=static runtime-link=static stage release debug
+
+When the above command completes, you should have the boost thread library
+built.  Now you need to copy files to the LDView source tree.  Copy the boost
+directory inside the boost_1_35_0 directory into the boost\include directory in
+the LDView source directory (so you end up with boost\include\boost).  Next,
+copy the stage\lib directory into the boost directory in the LDView source tree
+(so that you end up with boost\lib).
+
+To build LDView, run make.cmd.

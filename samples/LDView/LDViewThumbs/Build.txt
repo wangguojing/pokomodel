@@ -1,0 +1,83 @@
+In order to build this DLL, you first need to get LDView set up and built.
+Please see Build.txt in the main LDView directory for instructions on doing
+that.
+
+
+
+===============================================================================
+============================== VC++ 2005 Express ==============================
+===============================================================================
+
+Note: I believe that if you have the commercial version of Visual Studio 2005,
+you can just open the LDView solution and build the LDViewThumbs project.  This
+hasn't been tested, though.
+
+Unfortunately, the ATL portion of the Platform SDK isn't compatible as-is with
+VC++ 2005.  Fortunately, only minor changes are needed in order to make it
+compatible.  Open include\atl\atlwin.h and include\atl\atlbase.h from the
+Platform SDK in the Visual Studio text editor.
+
+In atlwin.h, go to line 1729.  It should look like this:
+
+                for(int i = 0; i < m_aChainEntry.GetSize(); i++)
+
+You need to add a new line above it to declare i, and remove the inline
+declaration from this line.  When you are done, it should look like this:
+
+				int i;
+                for(i = 0; i < m_aChainEntry.GetSize(); i++)
+
+In atlbase.h, you need to remove the dependency on atlthunk.lib, which is a
+library that only works in 64 bit Windows.  (This DLL will NOT work in 64 bit
+Windows.)  Go to line 287.  It should look like so:
+
+PVOID __stdcall __AllocStdCallThunk(VOID);
+
+Add an open comment at the beginning of that line, and then put a close comment
+at the end of line 293.  Then insert the following two lines after line 293:
+
+#define AllocStdCallThunk() HeapAlloc(GetProcessHeap(), 0, sizeof(_stdcallthunk))
+#define FreeStdCallThunk(p) HeapFree(GetProcessHeap(), 0, p)
+
+When you're done, the entire modified section will look like this:
+
+/*PVOID __stdcall __AllocStdCallThunk(VOID);
+VOID  __stdcall __FreeStdCallThunk(PVOID);
+
+#define AllocStdCallThunk() __AllocStdCallThunk()
+#define FreeStdCallThunk(p) __FreeStdCallThunk(p)
+
+#pragma comment(lib, "atlthunk.lib")*/
+#define AllocStdCallThunk() HeapAlloc(GetProcessHeap(), 0, sizeof(_stdcallthunk))
+#define FreeStdCallThunk(p) HeapFree(GetProcessHeap(), 0, p)
+
+If you want more information about these changes, go here:
+
+http://www.codeproject.com/wtl/WTLExpress.asp?msg=1336063
+
+You should now be able to build LDViewThumbs.  Just open LDView.sln in the main
+LDView directory, right click on LDViewThumbs in the project list, and select
+build.
+
+
+
+===============================================================================
+=============================== Visual Studio 6 ===============================
+===============================================================================
+
+Just open LDView.dsw in the main LDView directory, right click on LDViewThumbs
+in the project list, and select build.
+
+
+
+===============================================================================
+============================== VC++ Toolkit 2003 ==============================
+===============================================================================
+
+Run the following commands from a command prompt in the LDViewThumbs directory:
+
+"C:\Program Files\Microsoft Visual C++ Toolkit 2003\vcvars32.bat"
+nmake -f Makefile.vc
+
+(Note that you may have to adjust the path to the VC++ Toolkit 2003 directory to
+match its location on your computer.)

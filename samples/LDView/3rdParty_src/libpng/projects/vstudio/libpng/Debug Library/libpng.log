@@ -1,0 +1,17 @@
+﻿  png.c
+  pngerror.c
+  pngget.c
+  pngmem.c
+  pngpread.c
+  pngread.c
+  pngrio.c
+  pngrtran.c
+  pngrutil.c
+  pngset.c
+  pngtrans.c
+  pngwio.c
+  pngwrite.c
+  pngwtran.c
+  pngwutil.c
+  Generating Code...
+  libpng.vcxproj -> E:\WorkSpace\pokomodel\samples\LDView\3rdParty_src\lpng1624\projects\vstudio\Debug Library\libpng16.lib
