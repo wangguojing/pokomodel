@@ -3,6 +3,9 @@
 #include "client.h"
 #include "clientGameMode.h"
 
+#include "ConvertUTF.h"
 
-
+AclientGameMode::AclientGameMode()
+{
+}
 
