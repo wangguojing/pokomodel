@@ -6,9 +6,10 @@ public class client : ModuleRules
 {
 	public client(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore",
+        "Core", "CoreUObject", "Engine", "InputCore", "ProceduralMeshComponent" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "TCFoundation" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "TCFoundation", "LDLoader" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

@@ -13,7 +13,6 @@ class CLIENT_API AclientGameMode : public AGameMode
 {
 	GENERATED_BODY()
 
-		AclientGameMode();
-	
-	
+public:
+	AclientGameMode();
 };

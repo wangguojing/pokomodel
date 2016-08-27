@@ -10,3 +10,6 @@
 /client/Intermediate
 /client/*.db
 /client/Binaries
+/samples/LDView/3rdParty_src/unzip32/windll/vc14/dll/*.user
+/samples/LDView/LDLoader/*.user
+/samples/LDView/*.opendb

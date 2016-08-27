@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Thu Aug 25 22:01:46 2016
+/* at Sat Aug 27 23:28:36 2016
  */
 /* Compiler settings for LDViewThumbs.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 

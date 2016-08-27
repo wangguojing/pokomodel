@@ -3,7 +3,8 @@
 #include "client.h"
 #include "clientGameMode.h"
 
-#include "ConvertUTF.h"
+#include "AllowWindowsPlatformTypes.h"
+#include "LDLLineLine.h"
 
 AclientGameMode::AclientGameMode()
 {
