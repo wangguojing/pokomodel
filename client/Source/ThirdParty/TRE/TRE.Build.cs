@@ -10,14 +10,13 @@ public class TRE : ModuleRules
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            //PrivateDependencyModuleNames.AddRange(new string[] { "TRE" });
-
+            PublicDependencyModuleNames.AddRange(new string[] { "gl2ps" });
 
             string CommonLibPath = ModuleDirectory + "/";
             string HeaderPath = CommonLibPath;
 
             PublicIncludePaths.Add(HeaderPath + "../");
-            PublicIncludePaths.Add(HeaderPath + "../GL");
+            PublicIncludePaths.Add(HeaderPath + "GL");
 
             string PlatformPath = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64/" : "x86/";
             string ConfigPath = (Target.Configuration == UnrealTargetConfiguration.Development) ? "Release/" : "Debug/";

@@ -6,29 +6,25 @@ public class LDLib : ModuleRules
 {
     public LDLib(TargetInfo Target)
     {
-
         Type = ModuleType.External;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            string CommonLibPath = ModuleDirectory + "/";
-            string HeaderPath = CommonLibPath;
+            string HeaderPath = ModuleDirectory + "/";
 
             PublicIncludePaths.Add(HeaderPath + "../");
 
             string PlatformPath = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64/" : "x86/";
             string ConfigPath = (Target.Configuration == UnrealTargetConfiguration.Development) ? "Release/" : "Debug/";
-            string LibraryPath = CommonLibPath + "lib/";
+            string LibraryPath = HeaderPath + "lib/";
 
             PublicLibraryPaths.Add(LibraryPath);
 
-            string LibraryName = "LDLib.lib";
-
-            PublicAdditionalLibraries.Add(LibraryName);
+            PublicAdditionalLibraries.Add("LDLib.lib");
+            PublicAdditionalLibraries.Add("glu32.lib");
         }
 
         //PrivateDependencyModuleNames.AddRange(new string[] { "LDExporter", "TCFoundation", "LDLoader", "TRE" });
-
-        //Definitions.Add("NDEBUG;WIN32;_LIB;_BUILDING_TCFOUNDATION_LIB;NO_JPG_IMAGE_FORMAT");
+        Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST");
     }
 }
