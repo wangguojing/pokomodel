@@ -4,7 +4,7 @@
 #include "clientGameMode.h"
 
 #include "AllowWindowsPlatformTypes.h"
-#include "LDLLineLine.h"
+#include "LDrawModelViewer.h"
 
 AclientGameMode::AclientGameMode()
 {

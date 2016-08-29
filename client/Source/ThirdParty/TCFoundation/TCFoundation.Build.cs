@@ -10,6 +10,8 @@ public class TCFoundation : ModuleRules
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
+            //PrivateDependencyModuleNames.AddRange(new string[] { "UElibPNG" });
+
             string CommonLibPath = ModuleDirectory + "/";
             string HeaderPath = CommonLibPath;
 
