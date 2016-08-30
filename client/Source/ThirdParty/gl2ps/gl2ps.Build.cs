@@ -29,6 +29,6 @@ public class gl2ps : ModuleRules
             PublicAdditionalLibraries.Add(LibraryName);
         }
 
-        Definitions.Add("WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_USE_MATH_DEFINES;GL2PS_HAVE_ZLIB");
+        //Definitions.Add("WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_USE_MATH_DEFINES;GL2PS_HAVE_ZLIB");
     }
 }

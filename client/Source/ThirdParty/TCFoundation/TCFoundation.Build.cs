@@ -28,6 +28,6 @@ public class TCFoundation : ModuleRules
             PublicAdditionalLibraries.Add(LibraryName);
         }
 
-        //Definitions.Add("NDEBUG;WIN32;_LIB;_BUILDING_TCFOUNDATION_LIB;NO_JPG_IMAGE_FORMAT");
+        //Definitions.Add("NDEBUG;WIN32;_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_BUILDING_TCFOUNDATION_LIB;NO_PNG_IMAGE_FORMAT;NO_JPG_IMAGE_FORMAT;_NO_BOOST");
     }
 }

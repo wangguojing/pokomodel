@@ -7,15 +7,15 @@
 #include "ProceduralMeshComponent.h"
 
 #include "LDrawModelViewer.h"
-#include "TCFoundation/TCObject.h"
-#include "TCFoundation/TCTypedValueArray.h"
-#include "TCFoundation/TCArray.h"
+//#include "TCFoundation/TCObject.h"
+//#include "TCFoundation/TCTypedValueArray.h"
+//#include "TCFoundation/TCArray.h"
 
 #include "TRE/TREModel.h"
 #include "TRE/TREMainModel.h"
-#include "TRE/TREVertexStore.h"
-#include "TRE/TREVertexArray.h"
-#include "TRE/TREShapeGroup.h"
+//#include "TRE/TREVertexStore.h"
+//#include "TRE/TREVertexArray.h"
+//#include "TRE/TREShapeGroup.h"
 
 // Sets default values
 AMyLDLActor::AMyLDLActor()
@@ -29,41 +29,42 @@ AMyLDLActor::AMyLDLActor()
 	ldModelViewer->setFilename("C://Users//Public//Documents//LDraw//parts//1.dat");
 	ldModelViewer->reload();
 
-	TREModel * treModel = ldModelViewer->getMainTREModel()->getCurGeomModel();
-	TREShapeGroup ** treShapeGroup = treModel->getShapes();
-	for (int i = 0; i <= TREMLast; i++)
-	{
-		TREShapeGroup *shape = treShapeGroup[i];
+	//TREModel * treModel = ldModelViewer->getMainTREModel()->getCurGeomModel();
+	//TREShapeGroup ** treShapeGroup = treModel->getShapes();
+	//for (int i = 0; i <= TREMLast; i++)
+	//{
+	//	TREShapeGroup *shape = treShapeGroup[i];
 
-		if (shape != NULL)
-		{
-			TCULongArray *indices =
-				shape->getIndices(TRESTriangle, false);
-			TREVertexStore *vertexStore = shape->getVertexStore();
+	//	if (shape != NULL)
+	//	{
+	//		TCULongArray *indices =
+	//			shape->getIndices(TRESTriangle, false);
+	//		TREVertexStore *vertexStore = shape->getVertexStore();
 
-			if (indices != NULL)
-			{
-				TREVertexArray *vertices = vertexStore->getVertices();
-				//int count = indices->sort();
+	//		if (indices != NULL)
+	//		{
+	//			TREVertexArray *vertices = vertexStore->getVertices();
+	//			//indices->getItems();
+	//			//int count = indices->getCount();
 
-				//for (int p = 0; p < count; p += 3)
-				//{
+	//			//for (int p = 0; p < count; p += 3)
+	//			//{
 
-				//}
-			}
-			//indices = shape->getIndices(TRESQuad, false);
-			//if (indices != NULL)
-			//{
-			//	TREVertexArray *vertices = vertexStore->getVertices();
-			//	int count = indices->getCount();
+	//			//}
+	//		}
+	//		//indices = shape->getIndices(TRESQuad, false);
+	//		//if (indices != NULL)
+	//		//{
+	//		//	TREVertexArray *vertices = vertexStore->getVertices();
+	//		//	int count = indices->getCount();
 
-			//	for (int p = 0; p < count; p += 4)
-			//	{
+	//		//	for (int p = 0; p < count; p += 4)
+	//		//	{
 
-			//	}
-			//}
-		}
-	}
+	//		//	}
+	//		//}
+	//	}
+	//}
 
 	UProceduralMeshComponent* mesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("GeneratedMesh"));
 

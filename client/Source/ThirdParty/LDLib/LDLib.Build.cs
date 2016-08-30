@@ -26,7 +26,6 @@ public class LDLib : ModuleRules
             PublicAdditionalLibraries.Add("LDLib.lib");
             PublicAdditionalLibraries.Add("glu32.lib");
         }
-
-        Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST");
+        //Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST;_NO_TRE_THREADS");
     }
 }
