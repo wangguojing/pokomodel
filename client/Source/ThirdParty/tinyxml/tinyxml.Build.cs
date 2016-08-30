@@ -10,9 +10,6 @@ public class tinyxml : ModuleRules
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            //PrivateDependencyModuleNames.AddRange(new string[] { "TRE" });
-
-
             string CommonLibPath = ModuleDirectory + "/";
             string HeaderPath = CommonLibPath;
 

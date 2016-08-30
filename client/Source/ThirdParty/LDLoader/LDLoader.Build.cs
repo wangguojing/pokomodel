@@ -21,14 +21,9 @@ public class LDLoader : ModuleRules
 
             PublicLibraryPaths.Add(LibraryPath);
 
-            string LibraryName = "LDLoader";
+            string LibraryName = "LDLoader.lib";
 
-            //if (Target.Configuration != UnrealTargetConfiguration.Shipping)
-            //{
-            //    LibraryName += "_d";
-            //}
-
-            PublicAdditionalLibraries.Add(LibraryName + ".lib");
+            PublicAdditionalLibraries.Add(LibraryName);
         }
 
         //Definitions.Add("WIN32;NDEBUG;_LIB;_TC_STATIC;_NO_BOOST;");

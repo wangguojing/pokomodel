@@ -6,6 +6,9 @@ public class LDLib : ModuleRules
 {
     public LDLib(TargetInfo Target)
     {
+        PrivateDependencyModuleNames.AddRange(new string[] { "gl2ps", "tinyxml", "zlib", 
+            "LDExporter", "TCFoundation", "LDLoader", "TRE" });
+
         Type = ModuleType.External;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
@@ -24,7 +27,6 @@ public class LDLib : ModuleRules
             PublicAdditionalLibraries.Add("glu32.lib");
         }
 
-        //PrivateDependencyModuleNames.AddRange(new string[] { "LDExporter", "TCFoundation", "LDLoader", "TRE" });
         Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST");
     }
 }

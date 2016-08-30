@@ -6,7 +6,7 @@ public class LDExporter : ModuleRules
 {
     public LDExporter(TargetInfo Target)
     {
-        PrivateDependencyModuleNames.AddRange(new string[] { "tinyxml"});
+        //PrivateDependencyModuleNames.AddRange(new string[] { "tinyxml"});
 
         Type = ModuleType.External;
 

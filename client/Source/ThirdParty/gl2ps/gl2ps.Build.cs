@@ -6,6 +6,9 @@ public class gl2ps : ModuleRules
 {
     public gl2ps(TargetInfo Target)
     {
+        //PrivateDependencyModuleNames.AddRange(new string[] { "zlib" });
+        //PublicDependencyModuleNames.AddRange(new string[] { "zlib" });
+
         Type = ModuleType.External;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
@@ -26,6 +29,6 @@ public class gl2ps : ModuleRules
             PublicAdditionalLibraries.Add(LibraryName);
         }
 
-        //Definitions.Add("WIN32;NDEBUG;_LIB;_TC_STATIC;_NO_BOOST;");
+        Definitions.Add("WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_USE_MATH_DEFINES;GL2PS_HAVE_ZLIB");
     }
 }

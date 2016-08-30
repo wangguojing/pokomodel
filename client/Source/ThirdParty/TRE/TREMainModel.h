@@ -395,6 +395,9 @@ public:
 	static void setRawStudTextureData(TCByte *data, long length);
 	static TCImageArray *getStudTextures(void) { return sm_studTextures; }
 	static unsigned getStudTextureID(void) { return sm_studTextureID; }
+
+	TREModel *getCurGeomModel(void);
+
 protected:
 	void populateTrianglesMap(TRETexmappedShapeGroup *shapeGroup,
 		TRETrianglesMap &triangles);
@@ -483,7 +486,6 @@ protected:
 	void flattenConditionals(void);
 	void backgroundConditionals(int step);
 	TCULongArray *backgroundConditionals(TREShapeGroup *shapes, int step);
-	TREModel *getCurGeomModel(void);
 	void drawTexmapped(void);
 	void drawTexmappedInternal(bool texture, bool colorMaterialOff);
 

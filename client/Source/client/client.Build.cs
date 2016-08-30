@@ -9,19 +9,21 @@ public class client : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore",
         "Core", "CoreUObject", "Engine", "InputCore", "ProceduralMeshComponent" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "LDLib", "LDExporter", "TCFoundation", "LDLoader", "TRE" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "LDLib" });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
-		// if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
-		// {
-		//		if (UEBuildConfiguration.bCompileSteamOSS == true)
-		//		{
-		//			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
-		//		}
-		// }
-	}
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
+        // Uncomment if you are using online features
+        // PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        // if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
+        // {
+        //		if (UEBuildConfiguration.bCompileSteamOSS == true)
+        //		{
+        //			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+        //		}
+        // }
+
+        Definitions.Add("_NO_BOOST");
+    }
 }

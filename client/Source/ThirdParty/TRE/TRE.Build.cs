@@ -6,17 +6,17 @@ public class TRE : ModuleRules
 {
     public TRE(TargetInfo Target)
     {
+        //PublicDependencyModuleNames.AddRange(new string[] { "gl2ps" });
+
         Type = ModuleType.External;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
         {
-            PublicDependencyModuleNames.AddRange(new string[] { "gl2ps" });
 
             string CommonLibPath = ModuleDirectory + "/";
             string HeaderPath = CommonLibPath;
 
             PublicIncludePaths.Add(HeaderPath + "../");
-            PublicIncludePaths.Add(HeaderPath + "GL");
 
             string PlatformPath = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64/" : "x86/";
             string ConfigPath = (Target.Configuration == UnrealTargetConfiguration.Development) ? "Release/" : "Debug/";
@@ -27,8 +27,9 @@ public class TRE : ModuleRules
             string LibraryName = "TRE.lib";
 
             PublicAdditionalLibraries.Add(LibraryName);
+            PublicAdditionalLibraries.Add("opengl32.lib");
         }
 
-        //Definitions.Add("NDEBUG;WIN32;_LIB;_BUILDING_TCFOUNDATION_LIB;NO_JPG_IMAGE_FORMAT");
+        Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST");
     }
 }
