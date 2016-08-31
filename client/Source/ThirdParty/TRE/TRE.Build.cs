@@ -29,7 +29,7 @@ public class TRE : ModuleRules
             PublicAdditionalLibraries.Add(LibraryName);
             PublicAdditionalLibraries.Add("opengl32.lib");
         }
-
+        
         //Definitions.Add("NDEBUG;WIN32;_LIB;_TC_STATIC;_NO_BOOST");
     }
 }

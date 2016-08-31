@@ -4,6 +4,8 @@
 
 #include "AllowWindowsPlatformTypes.h"
 #include "ProceduralMeshComponent.h"
+#include "UnrealString.h"
+
 #include "TRE/TREVertexArray.h"
 #include "TCFoundation/TCTypedValueArray.h"
 
@@ -19,9 +21,9 @@ public:
 	// Sets default values for this actor's properties
 	AMyLDLActor();
 
-	void printStlTriangle(TArray<FVector> & uvbs, TArray<int32> & uibs, 
-		TREVertexArray *vertices, TCULongArray *indices, 
-		int ix, int i0, int i1, int i2);
+	/** If RelativeLocation should be considered relative to the world, rather than the parent */
+	UPROPERTY(EditAnywhere)
+	FString fileName;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -31,5 +33,8 @@ public:
 
 private:
 	UProceduralMeshComponent* mesh;
+
+	//UFUNCTION()
+	void OnRep_FileName();
 	
 };
