@@ -23,7 +23,12 @@ public class client : ModuleRules
         //			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
         //		}
         // }
-        //WIN32;_WINDOWS;
-        Definitions.Add("NDEBUG;_TC_STATIC;_NO_BOOST;_NO_TRE_THREADS");
+
+        Definitions.Add("NDEBUG");
+        Definitions.Add("WIN32");
+        Definitions.Add("_WINDOWS");
+        Definitions.Add("_TC_STATIC");
+        Definitions.Add("LDVIEW_APP");
+        Definitions.Add("_NO_BOOST");
     }
 }

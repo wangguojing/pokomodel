@@ -304,6 +304,12 @@ public:
 	void disableTexmaps(void);
 	TexmapInfo *getActiveTexmapInfo(void);
 	const TexmapInfoList &getTexmapInfos(void) const { return m_texmapInfos; }
+
+	typedef std::map<TREVertex*, TCULong> TREVertexIndexMap;
+	typedef std::pair<TREVertex*, TCULong> TREVertexIndexPair;
+
+	bool exportVBO(TREVertexIndexMap & vertexIndexMap, TREVertexArray & vbArray, TCULongArray & ibArray);
+
 protected:
 	struct TRETriangle
 	{
@@ -407,6 +413,27 @@ protected:
 		const TCFloat *matrix, float scale);
 	static void printStlStrips(FILE *file, TREShapeGroup *shapeGroup,
 		TREShapeType shapeType, const TCFloat *matrix, float scale);
+
+	static void exportStlTriangle(TREVertexIndexMap & vertexIndexMap,
+		TREVertexArray & vbArray,
+		TCULongArray & ibArray,
+		TREVertexArray *vertices,
+		TCULongArray *indices,
+		int ix,
+		int i0,
+		int i1,
+		int i2);
+
+	static void exportStlStrips(TREVertexIndexMap & vertexIndexMap,
+		TREVertexArray & vbArray,
+		TCULongArray & ibArray,
+		TREShapeGroup *shapeGroup, 
+		TREShapeType shapeType);
+
+	void exportVBOShapes(TREVertexIndexMap & vertexIndexMap, 
+		TREVertexArray & vbArray, 
+		TCULongArray & ibArray,
+		TREShapeGroup *shapes[]);
 
 	char *m_name;
 	TREMainModel *m_mainModel;

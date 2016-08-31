@@ -62,7 +62,6 @@
 	}																	\
 }
 
-
 //00000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333444444444455555555556
 //34567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
 
@@ -3644,6 +3643,160 @@ void TREModel::printStlStrips(
 	}
 }
 
+
+void TREModel::exportVBOShapes(
+	TREVertexIndexMap & vertexIndexMap,
+	TREVertexArray & vbArray,
+	TCULongArray & ibArray,
+	TREShapeGroup *shapes[])
+{
+	for (int i = 0; i <= TREMLast; i++)
+	{
+		TREShapeGroup *shape = shapes[i];
+
+		if (shape != NULL)
+		{
+			TCULongArray *indices =
+				shape->getIndices(TRESTriangle, false);
+			TREVertexStore *vertexStore = shape->getVertexStore();
+
+			if (indices != NULL)
+			{
+				TREVertexArray *vertices = vertexStore->getVertices();
+				int count = indices->getCount();
+
+				for (int p = 0; p < count; p += 3)
+				{
+					exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices, p, 0, 1, 2);
+				}
+			}
+			indices = shape->getIndices(TRESQuad, false);
+			if (indices != NULL)
+			{
+				TREVertexArray *vertices = vertexStore->getVertices();
+				int count = indices->getCount();
+
+				for (int p = 0; p < count; p += 4)
+				{
+					exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices, p, 0, 1, 2);
+					exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices, p, 0, 2, 3);
+				}
+			}
+			exportStlStrips(vertexIndexMap, vbArray, ibArray, shape, TRESTriangleStrip);
+			exportStlStrips(vertexIndexMap, vbArray, ibArray, shape, TRESTriangleFan);
+			exportStlStrips(vertexIndexMap, vbArray, ibArray, shape, TRESQuadStrip);
+		}
+	}
+}
+
+void TREModel::exportStlTriangle(
+	TREVertexIndexMap & vertexIndexMap,
+	TREVertexArray & vbArray,
+	TCULongArray & ibArray,
+	TREVertexArray *vertices,
+	TCULongArray *indices,
+	int ix,
+	int i0,
+	int i1,
+	int i2)
+{
+	int ip[3];
+	ip[0] = i0; ip[1] = i1; ip[2] = i2;
+
+	for (int i = 0; i < 3; i++)
+	{
+		int index = (*indices)[ix + ip[i]];
+		TREVertex * treVertex = &(*vertices)[index];
+		//TCVector vector(treVertex.v[0], treVertex.v[1], treVertex.v[2]);
+
+		TREVertexIndexMap::iterator itor = vertexIndexMap.find(treVertex);
+		if (itor == vertexIndexMap.end())
+		{
+			vbArray.addVertex(*treVertex);
+			TCULong index = vbArray.getCount() - 1;
+			ibArray.addItem(index);
+
+			vertexIndexMap.insert(TREVertexIndexPair(treVertex, index));
+		}
+		else
+		{
+			TCULong index = itor->second;
+			ibArray.addItem(index);
+		}
+
+		//vector = vector.transformPoint(matrix);
+		//fprintf(file, "      vertex %f %f %f\n", vector[0] * scale,
+		//	vector[1] * scale, vector[2] * scale);
+	}
+}
+
+
+void TREModel::exportStlStrips(TREVertexIndexMap & vertexIndexMap,
+	TREVertexArray & vbArray,
+	TCULongArray & ibArray,
+	TREShapeGroup *shapeGroup, 
+	TREShapeType shapeType)
+{
+	TCULongArray *indices = shapeGroup->getIndices(shapeType, false);
+	TCULongArray *stripCounts = shapeGroup->getStripCounts(shapeType, false);
+	TREVertexArray *vertices = shapeGroup->getVertexStore()->getVertices();
+	int stripMargin = 2;
+	int stripInc = 1;
+
+	if (shapeType == TRESQuadStrip)
+	{
+		stripMargin = 3;
+		stripInc = 2;
+	}
+	if (indices != NULL && stripCounts != NULL)
+	{
+		int numStrips = stripCounts->getCount();
+
+		if (numStrips > 0)
+		{
+			int ofs = 0;
+
+			for (int j = 0; j < numStrips; j++)
+			{
+				int stripCount = (*stripCounts)[j];
+
+				for (int k = 0; k < stripCount - stripMargin; k += stripInc)
+				{
+					switch (shapeType)
+					{
+					case TRESTriangleStrip:
+						if (k % 2 == 0)
+						{
+							exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices,
+								ofs + k, 0, 1, 2);
+						}
+						else
+						{
+							exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices,
+								ofs + k, 0, 2, 1);
+						}
+						break;
+					case TRESTriangleFan:
+						exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices,
+							ofs, 0, k + 1, k + 2);
+						break;
+					case TRESQuadStrip:
+						exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices,
+							ofs + k, 0, 1, 2);
+						exportStlTriangle(vertexIndexMap, vbArray, ibArray, vertices, indices,
+							ofs + k, 1, 2, 3);
+						break;
+					default:
+						// Get rid of gcc warnings.
+						break;
+					}
+				}
+				ofs += stripCount;
+			}
+		}
+	}
+}
+
 void TREModel::saveSTLShapes(
 	TREShapeGroup *shapes[],
 	FILE *file,
@@ -3692,6 +3845,27 @@ void TREModel::saveSTLShapes(
 	}
 }
 
+bool TREModel::exportVBO(
+	TREVertexIndexMap & vertexIndexMap, 
+	TREVertexArray & vbArray, 
+	TCULongArray & ibArray)
+{
+	exportVBOShapes(vertexIndexMap, vbArray, ibArray, m_shapes);
+	exportVBOShapes(vertexIndexMap, vbArray, ibArray, (TREShapeGroup **)m_coloredShapes);
+	if (m_subModels != NULL)
+	{
+		for (int i = 0; i < m_subModels->getCount(); i++)
+		{
+			TRESubModel *subModel = (*m_subModels)[i];
+			TCFloat newMatrix[16];
+
+			subModel->getEffectiveModel()->exportVBO(vertexIndexMap, vbArray, ibArray);
+		}
+	}
+	return true;
+}
+
+
 void TREModel::saveSTL(FILE *file, const TCFloat *matrix, float scale)
 {
 	saveSTLShapes(m_shapes, file, matrix, scale);
@@ -3707,6 +3881,15 @@ void TREModel::saveSTL(FILE *file, const TCFloat *matrix, float scale)
 			subModel->getEffectiveModel()->saveSTL(file, newMatrix, scale);
 		}
 	}
+
+	TREVertexIndexMap vertexIndexMap;
+	TREVertexArray * vbArray = new TREVertexArray;
+	TCULongArray * ibArray = new TCULongArray;
+
+	exportVBO(vertexIndexMap, *vbArray, *ibArray);
+
+	TCObject::release(vbArray);
+	TCObject::release(ibArray);
 }
 
 void TREModel::nextStep(void)
