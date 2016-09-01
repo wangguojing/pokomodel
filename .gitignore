@@ -14,3 +14,4 @@
 /samples/LDView/LDLoader/*.user
 /samples/LDView/*.opendb
 /client/Build/WindowsNoEditor/FileOpenOrder/*.log
+/client/*.opendb

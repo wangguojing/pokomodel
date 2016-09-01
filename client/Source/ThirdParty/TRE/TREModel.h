@@ -308,10 +308,8 @@ public:
 	typedef std::map<TREVertex*, TCULong> TREVertexIndexMap;
 	typedef std::pair<TREVertex*, TCULong> TREVertexIndexPair;
 
-	bool exportVBO(TREVertexArray & vbArray, 
-		TCULongArray & ibArray,
-		TREVertexArray & nbArray
-		);
+	bool exportVBO(TREVertexArray & vbArray, TCULongArray & ibArray);
+	bool exportVBO(TREVertexIndexMap & vertexIndexMap, TREVertexArray & vbArray, TCULongArray & ibArray, const TCFloat *matrix);
 
 protected:
 	struct TRETriangle
@@ -417,30 +415,29 @@ protected:
 	static void printStlStrips(FILE *file, TREShapeGroup *shapeGroup,
 		TREShapeType shapeType, const TCFloat *matrix, float scale);
 
-	void exportVBOShapes(TREVertexIndexMap & vertexIndexMap,
-		TREVertexArray & vbArray,
-		TCULongArray & ibArray,
-		TREVertexArray & nbArray,
-		TREShapeGroup *shapes[]);
-
 	static void exportStlTriangle(TREVertexIndexMap & vertexIndexMap,
 		TREVertexArray & vbArray,
 		TCULongArray & ibArray,
-		TREVertexArray & nbArray,
 		TREVertexArray *vertices,
 		TCULongArray *indices,
-		TREVertexArray *normals,
 		int ix,
 		int i0,
 		int i1,
-		int i2);
+		int i2,
+		const TCFloat *matrix);
 
 	static void exportStlStrips(TREVertexIndexMap & vertexIndexMap,
 		TREVertexArray & vbArray,
 		TCULongArray & ibArray,
-		TREVertexArray & nbArray,
 		TREShapeGroup *shapeGroup, 
-		TREShapeType shapeType);
+		TREShapeType shapeType,
+		const TCFloat *matrix);
+
+	void exportVBOShapes(TREVertexIndexMap & vertexIndexMap, 
+		TREVertexArray & vbArray, 
+		TCULongArray & ibArray,
+		TREShapeGroup *shapes[],
+		const TCFloat *matrix);
 
 	char *m_name;
 	TREMainModel *m_mainModel;
